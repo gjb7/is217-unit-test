@@ -6,37 +6,73 @@
 			var date = new Date(timeString || ""),
 				now = new Date(nowString),
 				diff = ((now.getTime() - date.getTime()) / 1000),
-				dayDiff = Math.floor(diff / 86400);
+				dayDiff = diff / 86400,
+				roundedDayDiff = dayDiff > 0 ? Math.floor(dayDiff) : Math.ceil(dayDiff);
 			
-			if (isNaN(dayDiff) || dayDiff < 0 || dayDiff >= 31) {
+			if (isNaN(roundedDayDiff) || roundedDayDiff <= -31 || roundedDayDiff >= 31) {
 				return null;
 			}
 			
-			if (!dayDiff) {
-				if (diff < 60) {
-					return "just now";
+			console.log(nowString, timeString);
+			console.log(diff, roundedDayDiff);
+			
+			if (!roundedDayDiff) {
+				if (diff > 0) {
+					if (diff < 60) {
+						return "just now";
+					}
+					else if (diff < 120) {
+						return "1 min ago";
+					}
+					else if (diff < 3600) {
+						return Math.floor(diff / 60) + " mins ago";
+					}
+					else if (diff < 7200) {
+						return "1 hr ago";
+					}
+					else if (diff < 86400) {
+						return Math.floor(diff / 3600) + " hrs ago";
+					}
 				}
-				else if (diff < 120) {
-					return "1 min ago";
-				}
-				else if (diff < 3600) {
-					return Math.floor(diff / 6) + " mins ago";
-				}
-				else if (diff < 7200) {
-					return "1 hr ago";
-				}
-				else if (diff < 86400) {
-					return Math.floor(diff / 3600) + " hrs ago";
+				else if (diff < 0) {
+					if (diff > -60) {
+						return "just now";
+					}
+					else if (diff > -120) {
+						return "in 1 min";
+					}
+					else if (diff > -3600) {
+						return "in " + Math.abs(Math.ceil(diff / 60)) + " mins";
+					}
+					else if (diff > -7200) {
+						return "in 1 hr";
+					}
+					else if (diff > -86400) {
+						return "in " + Math.abs(Math.ceil(diff / 3600)) + " hrs";
+					}
 				}
 			}
-			else if (dayDiff == 1) {
+			else if (roundedDayDiff == 1) {
 				return "yesterday";
 			}
-			else if (dayDiff < 7) {
-				return dayDiff + " days ago";
+			else if (roundedDayDiff == -1) {
+				return "tomorrow";
 			}
-			else if (dayDiff < 31) {
-				return Math.ceil(dayDiff / 7) + " wks ago";
+			else if (roundedDayDiff > 0) {
+				if (roundedDayDiff < 7) {
+					return roundedDayDiff + " days ago";
+				}
+				else if (roundedDayDiff < 31) {
+					return Math.ceil(roundedDayDiff / 7) + " wks ago";
+				}
+			}
+			else if (roundedDayDiff < 0) {
+				if (roundedDayDiff > -7) {
+					return "in " + Math.abs(roundedDayDiff) + " days";
+				}
+				else if (roundedDayDiff > -31) {
+					return "in " + Math.abs(Math.floor(roundedDayDiff / 7)) + " wks";
+				}
 			}
 			
 			return null;
