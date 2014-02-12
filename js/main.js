@@ -15,24 +15,19 @@
 		date("2007/01/26 22:23:30", null);
 	});
 	
-	QUnit.test("prettyDate.update", function() {
-		var links = $('#qunit-fixture .time a')
-		
-		QUnit.equal(links[0].innerHTML, "January 28th, 2008");
-		QUnit.equal(links[1].innerHTML, "January 27th, 2008");
-		prettyDate.update("2008-01-28T22:25:00Z");
-		QUnit.equal(links[0].innerHTML, "2 hrs ago");
-		QUnit.equal(links[1].innerHTML, "yesterday");
-	});
+	function domTest(name, now, first, second) {
+		QUnit.test(name, function() {
+			var links = $('#qunit-fixture .time a')
+			
+			QUnit.equal(links[0].innerHTML, "January 28th, 2008");
+			QUnit.equal(links[1].innerHTML, "January 27th, 2008");
+			prettyDate.update(now);
+			QUnit.equal(links[0].innerHTML, first);
+			QUnit.equal(links[1].innerHTML, second);
+		});
+	}
 	
-	QUnit.test("prettyDate.update, one day later", function() {
-		var links = $('#qunit-fixture .time a')
-		
-		QUnit.equal(links[0].innerHTML, "January 28th, 2008");
-		QUnit.equal(links[1].innerHTML, "January 27th, 2008");
-		prettyDate.update("2008/01/29 22:25:00");
-		QUnit.equal(links[0].innerHTML, "yesterday");
-		QUnit.equal(links[1].innerHTML, "2 days ago");
-	});
+	domTest("prettyDate.update", "2008-01-28T22:25:00Z", "2 hrs ago", "yesterday");
+	domTest("prettyDate.update, one day later", "2008/01/29 22:25:00", "yesterday", "2 days ago");
 })(window);
 
