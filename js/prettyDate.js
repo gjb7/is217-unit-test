@@ -26,7 +26,7 @@
 					return "1 hr ago";
 				}
 				else if (diff < 86400) {
-					return Math.floor(diff / 3600) + "hrs ago";
+					return Math.floor(diff / 3600) + " hrs ago";
 				}
 			}
 			else if (dayDiff == 1) {
