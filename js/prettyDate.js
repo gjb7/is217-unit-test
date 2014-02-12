@@ -13,9 +13,6 @@
 				return null;
 			}
 			
-			console.log(nowString, timeString);
-			console.log(diff, roundedDayDiff);
-			
 			if (!roundedDayDiff) {
 				if (diff > 0) {
 					if (diff < 60) {
