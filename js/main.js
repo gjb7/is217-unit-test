@@ -1,9 +1,9 @@
 (function(global) {
 	var $ = global.$;
 	
-	function prettyDate(time) {
-		var date = new Date(time || ""),
-			now = new Date(),
+	function prettyDate(nowString, timeString) {
+		var date = new Date(timeString || ""),
+			now = new Date(nowString),
 			diff = ((now.getTime() - date.getTime()) / 1000),
 			dayDiff = Math.floor(diff / 86400);
 		
@@ -44,7 +44,7 @@
 		$('a').each(function() {
 			var link = $(this);
 			if (link.attr('title')) {
-				var date = prettyDate(link.attr('title'));
+				var date = prettyDate('2008-01-28T22:25:00Z', link.attr('title'));
 				if (date) {
 					link.html(date);
 				}
