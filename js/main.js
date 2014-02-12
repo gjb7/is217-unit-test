@@ -2,9 +2,9 @@
 	var $ = global.$,
 		QUnit = global.QUnit;
 	
-	QUnit.test("prettydate basics", function() {
+	QUnit.test("prettyDate.format", function() {
 		function date(then, expected) {
-			QUnit.equal(prettyDate("2008/01/28 22:25:00", then), expected);
+			QUnit.equal(prettyDate.format("2008/01/28 22:25:00", then), expected);
 		}
 		
 		date("2008/01/28 22:24:30", "just now");
