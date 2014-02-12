@@ -42,20 +42,6 @@
 		return null;
 	}
 	
-	function test(then, expected) {
-		results.total++;
-		var result = prettyDate("2008/01/28 22:25:00", then);
-		if (result !== expected) {
-			results.bad++;
-			console.log("Expected " + expected + ", but was " + result);
-		}
-	}
-	
-	var results = {
-		total: 0,
-		bad: 0
-	};
-	
 	QUnit.test("prettydate basics", function() {
 		var now = "2008/01/28 22:25:00";
 		QUnit.equal(prettyDate(now, "2008/01/28 22:24:30"), "just now");
