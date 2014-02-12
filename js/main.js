@@ -7,7 +7,7 @@
 			diff = ((now.getTime() - date.getTime()) / 1000),
 			dayDiff = Math.floor(diff / 86400);
 		
-		if (isNaN(dayDiff)) || dayDiff < 0 || dayDiff >= 31) {
+		if (isNaN(dayDiff) || dayDiff < 0 || dayDiff >= 31) {
 			return null;
 		}
 		
@@ -27,6 +27,7 @@
 			else if (diff < 86400) {
 				return Math.floor(diff / 3600) + "hrs ago";
 			}
+		}
 		else if (dayDiff == 1) {
 			return "yesterday";
 		}
@@ -48,6 +49,7 @@
 				if (date) {
 					link.html(date);
 				}
+			}
 		});
 	});
 })(window);
